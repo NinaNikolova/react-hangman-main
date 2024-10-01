@@ -2,14 +2,21 @@ import { useCallback, useEffect, useState } from "react"
 import { HangmanDrawing } from "./HangmanDrawing"
 import { HangmanWord } from "./HangmanWord"
 import { Keyboard } from "./Keyboard"
-import words from "./wordList.json"
-
+import englishWords from "./wordList.json"
+import bulgarianWords from "./wordListBg.json"
+let bgWord = '';
+let enWord = '';
+let randomIndex = 1;
 function getWord() {
-  return words[Math.floor(Math.random() * words.length)]
+  randomIndex = Math.floor(Math.random() * englishWords.length)
+  bgWord = bulgarianWords[randomIndex]
+  return englishWords[randomIndex]
 }
 
 function App() {
   const [wordToGuess, setWordToGuess] = useState(getWord)
+
+  const [wordToShow, setWordToShow] = useState(bgWord)
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
 
   const incorrectLetters = guessedLetters.filter(
@@ -53,7 +60,7 @@ function App() {
 
       e.preventDefault()
       setGuessedLetters([])
-      setWordToGuess(getWord())
+      setWordToGuess(enWord)
     }
 
     document.addEventListener("keypress", handler)
@@ -72,9 +79,11 @@ function App() {
         gap: "2rem",
         margin: "0 auto",
         alignItems: "center",
+        padding: "1rem"
       }}
     >
-      <div style={{ fontSize: "2rem", textAlign: "center" }}>
+      <div style={{ color: 'orange', fontSize: "2rem" }}>{wordToShow}</div>
+      <div style={{ fontSize: "1rem", textAlign: "center" }}>
         {isWinner && "Winner! - Refresh to try again"}
         {isLoser && "Nice Try - Refresh to try again"}
       </div>
