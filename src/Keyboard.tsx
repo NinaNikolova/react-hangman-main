@@ -46,8 +46,8 @@ export function Keyboard({
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(75px, 1fr))",
-        gap: ".5rem",
+        gridTemplateColumns: "repeat(auto-fit, minmax(50px, 1fr))", // Adjusted minimum size
+        gap: ".2rem",
       }}
     >
       {KEYS.map(key => {
@@ -56,9 +56,8 @@ export function Keyboard({
         return (
           <button
             onClick={() => addGuessedLetter(key)}
-            className={`${styles.btn} ${isActive ? styles.active : ""} ${
-              isInactive ? styles.inactive : ""
-            }`}
+            className={`${styles.btn} ${isActive ? styles.active : ""} ${isInactive ? styles.inactive : ""
+              }`}
             disabled={isInactive || isActive || disabled}
             key={key}
           >
