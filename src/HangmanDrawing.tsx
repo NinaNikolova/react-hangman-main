@@ -94,7 +94,9 @@ type HangmanDrawingProps = {
 export function HangmanDrawing({ numberOfGuesses }: HangmanDrawingProps) {
   return (
     <div style={{ position: "relative" }}>
-      {BODY_PARTS.slice(0, numberOfGuesses)}
+      {BODY_PARTS.slice(0, numberOfGuesses).map((part, index) => (
+        <div key={index}>{part}</div> // Add a unique key for each part
+      ))}
       <div
         style={{
           height: "50px",

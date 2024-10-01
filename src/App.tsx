@@ -82,7 +82,26 @@ function App() {
         padding: "1rem"
       }}
     >
-      <div style={{ color: 'orange', fontSize: "2rem" }}>{wordToShow}</div>
+      <div style={{ color: 'orange', fontSize: "2rem" }}>{wordToShow}
+        <button
+          onClick={() => window.location.reload()}
+          style={{
+            margin: "5px",
+            padding: "5px 10px",
+            fontSize: "1.5rem",
+            backgroundColor: "#ff6600",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            transition: "background-color 0.3s ease",
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#e65c00")}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#ff6600")}
+        >
+          Refresh
+        </button>
+      </div>
       <div style={{ fontSize: "1rem", textAlign: "center" }}>
         {isWinner && "Winner! - Refresh to try again"}
         {isLoser && "Nice Try - Refresh to try again"}
