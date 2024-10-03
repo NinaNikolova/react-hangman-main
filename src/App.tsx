@@ -20,7 +20,7 @@ function App() {
 
   const [wordToShow, setWordToShow] = useState(bgWord)
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
-
+  const [score, setScore] = useState(0);
   const incorrectLetters = guessedLetters.filter(
     letter => !wordToGuess.includes(letter)
   )
@@ -75,8 +75,12 @@ function App() {
   useEffect(() => {
     if (isWinner) {
       playWinSound(); // Play win sound
+      setScore((prevScore) => prevScore + 1); // Increase score
+      setTimeout(resetGame, 2000);
     } else if (isLoser) {
       playLoseSound(); // Play lose sound
+      setScore((prevScore) => prevScore - 1); // Increase score
+      setTimeout(resetGame, 2000);
     }
   }, [isWinner, isLoser]);
   const resetGame = () => {
@@ -116,6 +120,7 @@ function App() {
         >
           Отново
         </button>
+
         <span style={{ fontSize: "1rem", textAlign: "center" }}>
           {isWinner && "Winner!"}
           {isLoser && "Nice Try!"}
@@ -128,6 +133,9 @@ function App() {
         guessedLetters={guessedLetters}
         wordToGuess={wordToGuess}
       />
+      <div style={{ fontSize: "1.2rem", position: "absolute", marginTop: "80px", marginLeft: "-200px" }}>
+        <strong>Score: {score}</strong>
+      </div> {/* Display the score */}
       <div style={{ alignSelf: "stretch" }}>
         <Keyboard
           disabled={isWinner || isLoser}
