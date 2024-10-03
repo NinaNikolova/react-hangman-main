@@ -76,19 +76,19 @@ function App() {
         maxWidth: "800px",
         display: "flex",
         flexDirection: "column",
-        gap: "2rem",
+        gap: "1rem",
         margin: "0 auto",
         alignItems: "center",
         padding: "1rem"
       }}
     >
-      <div style={{ color: 'orange', fontSize: "2rem" }}>{wordToShow}
+      <div style={{ color: 'orange', fontSize: "1.6rem" }}>{wordToShow}
         <button
           onClick={() => window.location.reload()}
           style={{
-            margin: "5px",
+            margin: "2px",
             padding: "5px 10px",
-            fontSize: "1.5rem",
+            fontSize: "1rem",
             backgroundColor: "#ff6600",
             color: "white",
             border: "none",
@@ -99,12 +99,12 @@ function App() {
           onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#e65c00")}
           onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#ff6600")}
         >
-          Refresh
+          Next
         </button>
       </div>
       <div style={{ fontSize: "1rem", textAlign: "center" }}>
-        {isWinner && "Winner! - Refresh to try again"}
-        {isLoser && "Nice Try - Refresh to try again"}
+        {isWinner && "Winner!"}
+        {isLoser && "Nice Try!"}
       </div>
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
       <HangmanWord

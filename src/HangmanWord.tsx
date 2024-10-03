@@ -14,7 +14,7 @@ export function HangmanWord({
       style={{
         display: "flex",
         gap: ".25em",
-        fontSize: "3rem",
+        fontSize: "2.2rem",
         fontWeight: "bold",
         textTransform: "uppercase",
         fontFamily: "monospace",
