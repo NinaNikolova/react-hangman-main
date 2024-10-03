@@ -79,7 +79,12 @@ function App() {
       playLoseSound(); // Play lose sound
     }
   }, [isWinner, isLoser]);
-
+  const resetGame = () => {
+    const newWord = getWord();
+    setWordToGuess(newWord);
+    setWordToShow(bgWord);
+    setGuessedLetters([]);
+  };
   return (
     <div
       style={{
@@ -94,7 +99,7 @@ function App() {
     >
       <div style={{ color: 'orange', fontSize: "1.6rem" }}>{wordToShow}
         <button
-          onClick={() => window.location.reload()}
+          onClick={() => resetGame()}
           style={{
             marginInline: "10px",
             padding: "5px 10px",
@@ -109,7 +114,7 @@ function App() {
           onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#e65c00")}
           onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#ff6600")}
         >
-          Next
+          Отново
         </button>
         <span style={{ fontSize: "1rem", textAlign: "center" }}>
           {isWinner && "Winner!"}
