@@ -6,6 +6,12 @@ import englishWords from "./wordList.json"
 import bulgarianWords from "./wordListBg.json"
 import { playWinSound, playLoseSound } from "./utils/sounds";
 
+const colors = ["red", "blue", "green", "orange", "lilac", "red", "darkblue", "brown", "lightblue", "purple", "indigo", "pink"];
+function getRandomColor() {
+  const randomIndex = Math.floor(Math.random() * colors.length);
+  return colors[randomIndex];
+}
+
 let bgWord = '';
 let enWord = '';
 let randomIndex = 1;
@@ -21,6 +27,7 @@ function App() {
   const [wordToShow, setWordToShow] = useState(bgWord)
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
   const [score, setScore] = useState(0);
+  const [bgWordColor, setBgWordColor] = useState(getRandomColor());
   const incorrectLetters = guessedLetters.filter(
     letter => !wordToGuess.includes(letter)
   )
@@ -87,6 +94,7 @@ function App() {
     const newWord = getWord();
     setWordToGuess(newWord);
     setWordToShow(bgWord);
+    setBgWordColor(getRandomColor());
     setGuessedLetters([]);
   };
   return (
@@ -101,7 +109,7 @@ function App() {
         padding: "1rem"
       }}
     >
-      <div style={{ color: 'orange', fontSize: "1.6rem" }}>{wordToShow}
+      <div style={{ color: bgWordColor, fontSize: "1.6rem" }}>{wordToShow}
         <button
           onClick={() => resetGame()}
           style={{
@@ -118,7 +126,7 @@ function App() {
           onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#e65c00")}
           onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#ff6600")}
         >
-          Отново
+          Next
         </button>
 
         <span style={{ fontSize: "1rem", textAlign: "center" }}>
