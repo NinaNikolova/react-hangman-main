@@ -4,6 +4,8 @@ import { HangmanWord } from "./HangmanWord"
 import { Keyboard } from "./Keyboard"
 import englishWords from "./wordList.json"
 import bulgarianWords from "./wordListBg.json"
+
+
 let bgWord = '';
 let enWord = '';
 let randomIndex = 1;
@@ -70,13 +72,14 @@ function App() {
     }
   }, [])
 
+
   return (
     <div
       style={{
         maxWidth: "800px",
         display: "flex",
         flexDirection: "column",
-        gap: "1rem",
+        gap: "0.6rem",
         margin: "0 auto",
         alignItems: "center",
         padding: "1rem"
@@ -86,9 +89,9 @@ function App() {
         <button
           onClick={() => window.location.reload()}
           style={{
-            margin: "2px",
+            marginInline: "10px",
             padding: "5px 10px",
-            fontSize: "1rem",
+            fontSize: "1.4rem",
             backgroundColor: "#ff6600",
             color: "white",
             border: "none",
@@ -101,11 +104,12 @@ function App() {
         >
           Next
         </button>
+        <span style={{ fontSize: "1rem", textAlign: "center" }}>
+          {isWinner && "Winner!"}
+          {isLoser && "Nice Try!"}
+        </span>
       </div>
-      <div style={{ fontSize: "1rem", textAlign: "center" }}>
-        {isWinner && "Winner!"}
-        {isLoser && "Nice Try!"}
-      </div>
+
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
       <HangmanWord
         reveal={isLoser}
@@ -122,7 +126,7 @@ function App() {
           addGuessedLetter={addGuessedLetter}
         />
       </div>
-    </div>
+    </div >
   )
 }
 
