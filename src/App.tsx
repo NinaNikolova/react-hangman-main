@@ -4,7 +4,7 @@ import { HangmanWord } from "./HangmanWord"
 import { Keyboard } from "./Keyboard"
 import englishWords from "./wordList.json"
 import bulgarianWords from "./wordListBg.json"
-
+import { playWinSound, playLoseSound } from "./utils/sounds";
 
 let bgWord = '';
 let enWord = '';
@@ -71,7 +71,14 @@ function App() {
       document.removeEventListener("keypress", handler)
     }
   }, [])
-
+  // Effect to handle win/lose sounds
+  useEffect(() => {
+    if (isWinner) {
+      playWinSound(); // Play win sound
+    } else if (isLoser) {
+      playLoseSound(); // Play lose sound
+    }
+  }, [isWinner, isLoser]);
 
   return (
     <div
