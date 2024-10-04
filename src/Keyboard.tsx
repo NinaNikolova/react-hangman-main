@@ -46,7 +46,7 @@ export function Keyboard({
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(50px, 1fr))", // Adjusted minimum size
+        gridTemplateColumns: "repeat(auto-fit, minmax(60px, 1fr))", // Adjusted minimum size
         gap: ".2rem",
       }}
     >
