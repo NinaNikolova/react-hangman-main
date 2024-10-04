@@ -1,45 +1,15 @@
 import { useCallback, useEffect, useState } from "react"
+import './App.css';
 import { HangmanDrawing } from "./HangmanDrawing"
 import { HangmanWord } from "./HangmanWord"
 import { Keyboard } from "./Keyboard"
 import englishWords from "./wordList.json"
 import bulgarianWords from "./wordListBg.json"
 import { playWinSound, playLoseSound, playNextLevelSound, playFinishLevel1Sound, playFinishLevel2Sound } from "./utils/sounds";
-const images = [
-  "/images/bg1.jpg",
-  "/images/bg2.jpg",
-  "/images/bg3.jpg",
-  "/images/bg4.jpg",
-  "/images/bg5.jpg",
-  "/images/bg6.jpg",
-  "/images/bg7.jpg",
-  "/images/bg8.jpg",
-  "/images/bg9.jpg",
-  "/images/bg10.jpg",
-  "/images/bg11.jpg",
-  "/images/bg12.jpg",
-  "/images/bg13.jpg",
-  "/images/bg14.jpg",
-  "/images/bg15.jpg",
-  "/images/bg16.jpg",
-  "/images/bg17.jpg",
-  "/images/bg18.jpg",
-  "/images/bg19.jpg",
-  "/images/bg20.jpg",
-  "/images/bg21.jpg",
-];
-function getRandomImage() {
-  const randomIndex = Math.floor(Math.random() * images.length);
-  return images[randomIndex];
-}
+import { getRandomImage } from "./utils/images";
+import { getRandomColor } from "./utils/colors";
 
 
-
-const colors = ["red", "blue", "green", "#ff6600", "lilac", "red", "darkblue", "brown", "purple", "indigo", "pink"];
-function getRandomColor() {
-  const randomIndex = Math.floor(Math.random() * colors.length);
-  return colors[randomIndex];
-}
 
 let bgWord = '';
 let enWord = '';
@@ -151,33 +121,15 @@ function App() {
   };
   return (
     <div
+      className="container"
       style={{
-        maxWidth: "800px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.6rem",
-        margin: "0 auto",
-        alignItems: "center",
-        padding: "1rem",
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
       }}
     >
       <div style={{ color: bgWordColor, fontSize: "1.6rem" }}>{wordToShow}
         <button
+          className="main-btn"
           onClick={() => resetGame()}
-          style={{
-            marginInline: "10px",
-            padding: "5px 10px",
-            fontSize: "1.4rem",
-            backgroundColor: "#ff6600",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            transition: "background-color 0.3s ease",
-          }}
           onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#e65c00")}
           onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#ff6600")}
         >
@@ -196,10 +148,10 @@ function App() {
         guessedLetters={guessedLetters}
         wordToGuess={wordToGuess}
       />
-      <div style={{ fontSize: "1.6rem", position: "absolute", marginTop: "80px", marginLeft: "-200px", color: '#ff6600' }}>
+      <div className="score">
         <strong>Score: {score}</strong>
       </div>
-      <div style={{ fontSize: "1.6rem", position: "absolute", marginTop: "120px", marginLeft: "-200px", color: '#ff6600' }}>
+      <div className="level">
         <strong>Level: {level}</strong>
       </div>
       <div style={{ alignSelf: "stretch" }}>
