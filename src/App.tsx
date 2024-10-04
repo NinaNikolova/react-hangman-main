@@ -29,6 +29,7 @@ function App() {
   const [bgWordColor, setBgWordColor] = useState(getRandomColor());
   const [backgroundImage, setBackgroundImage] = useState(getRandomImage());
   const [level, setLevel] = useState(1);
+  const [isGameWon, setIsGameWon] = useState(false);
   const incorrectLetters = guessedLetters.filter(
     letter => !wordToGuess.includes(letter)
   )
@@ -96,11 +97,14 @@ function App() {
   }, [isWinner, isLoser]);
   useEffect(() => {
     if (score == 60) {
+      setIsGameWon(true);
       playFinishLevel1Sound();
       playFinishLevel2Sound();
+      setTimeout(resetGame, 4000);
+      setIsGameWon(false);
       setScore(0);
       setLevel(1);
-      resetGame();
+
     } else if (score >= 40) {
       setLevel(3); // Level 3 starts at score 40
       if (score == 40) {
@@ -130,6 +134,10 @@ function App() {
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
+      <div className={isGameWon ? "pyro visible" : "pyro"}>
+        <div className="before"></div>
+        <div className="after"></div>
+      </div>
       <div style={{ color: bgWordColor, fontSize: "1.6rem" }}>{wordToShow}
         {/* <button
           className="main-btn"
