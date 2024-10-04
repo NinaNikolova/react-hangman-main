@@ -82,7 +82,9 @@ function App() {
   useEffect(() => {
     if (isWinner) {
       if (score == 20 || score == 40 || score == 60) {
-        playWinSound(); // Play win sound
+        playFinishLevel1Sound();
+      } else {
+        playWinSound();
       }
       setScore((prevScore) => prevScore + 1); // Increase score
       setTimeout(resetGame, 2000);
@@ -103,6 +105,8 @@ function App() {
       setLevel(3); // Level 3 starts at score 40
       if (score == 40) {
         playNextLevelSound();
+      } else {
+
       }
     } else if (score >= 20) {
       setLevel(2); // Level 2 starts at score 20
@@ -127,19 +131,19 @@ function App() {
       }}
     >
       <div style={{ color: bgWordColor, fontSize: "1.6rem" }}>{wordToShow}
-        <button
+        {/* <button
           className="main-btn"
           onClick={() => resetGame()}
           onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#e65c00")}
           onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#ff6600")}
         >
           Next
-        </button>
+        </button> */}
 
-        <span style={{ fontSize: "1rem", textAlign: "center" }}>
+        {/* <span style={{ fontSize: "1rem", textAlign: "center" }}>
           {isWinner && "Yes!"}
           {isLoser && "Nice Try!"}
-        </span>
+        </span> */}
       </div>
 
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
