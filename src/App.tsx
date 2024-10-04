@@ -102,7 +102,9 @@ function App() {
   }, [])
   useEffect(() => {
     if (isWinner) {
-      playWinSound(); // Play win sound
+      if (score == 20 || score == 40 || score == 60) {
+        playWinSound(); // Play win sound
+      }
       setScore((prevScore) => prevScore + 1); // Increase score
       setTimeout(resetGame, 2000);
     } else if (isLoser) {
