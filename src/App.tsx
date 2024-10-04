@@ -5,8 +5,28 @@ import { Keyboard } from "./Keyboard"
 import englishWords from "./wordList.json"
 import bulgarianWords from "./wordListBg.json"
 import { playWinSound, playLoseSound } from "./utils/sounds";
+const images = [
+  "/images/bg1.jpg",
+  "/images/bg2.jpg",
+  "/images/bg3.jpg",
+  "/images/bg4.jpg",
+  "/images/bg5.jpg",
+  "/images/bg6.jpg",
+  "/images/bg7.jpg",
+  "/images/bg8.jpg",
+  "/images/bg9.jpg",
+  "/images/bg10.jpg",
+  "/images/bg11.jpg",
+  // Add more image paths as needed
+];
+function getRandomImage() {
+  const randomIndex = Math.floor(Math.random() * images.length);
+  return images[randomIndex];
+}
 
-const colors = ["red", "blue", "green", "orange", "lilac", "red", "darkblue", "brown", "lightblue", "purple", "indigo", "pink"];
+
+
+const colors = ["red", "blue", "green", "orange", "lilac", "red", "darkblue", "brown", "purple", "indigo", "pink"];
 function getRandomColor() {
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
@@ -28,6 +48,7 @@ function App() {
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
   const [score, setScore] = useState(0);
   const [bgWordColor, setBgWordColor] = useState(getRandomColor());
+  const [backgroundImage, setBackgroundImage] = useState(getRandomImage());
   const incorrectLetters = guessedLetters.filter(
     letter => !wordToGuess.includes(letter)
   )
@@ -95,6 +116,7 @@ function App() {
     setWordToGuess(newWord);
     setWordToShow(bgWord);
     setBgWordColor(getRandomColor());
+    setBackgroundImage(getRandomImage());
     setGuessedLetters([]);
   };
   return (
@@ -106,7 +128,10 @@ function App() {
         gap: "0.6rem",
         margin: "0 auto",
         alignItems: "center",
-        padding: "1rem"
+        padding: "1rem",
+        backgroundImage: `url(${backgroundImage})`, // Apply the background image
+        backgroundSize: "cover", // Ensure the image covers the container
+        backgroundPosition: "center", // Center the background image
       }}
     >
       <div style={{ color: bgWordColor, fontSize: "1.6rem" }}>{wordToShow}
@@ -141,7 +166,7 @@ function App() {
         guessedLetters={guessedLetters}
         wordToGuess={wordToGuess}
       />
-      <div style={{ fontSize: "1.2rem", position: "absolute", marginTop: "80px", marginLeft: "-200px" }}>
+      <div style={{ fontSize: "1.6rem", position: "absolute", marginTop: "80px", marginLeft: "-200px", color: 'orange' }}>
         <strong>Score: {score}</strong>
       </div> {/* Display the score */}
       <div style={{ alignSelf: "stretch" }}>
