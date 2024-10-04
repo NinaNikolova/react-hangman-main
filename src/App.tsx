@@ -17,7 +17,16 @@ const images = [
   "/images/bg9.jpg",
   "/images/bg10.jpg",
   "/images/bg11.jpg",
-  // Add more image paths as needed
+  "/images/bg12.jpg",
+  "/images/bg13.jpg",
+  "/images/bg14.jpg",
+  "/images/bg15.jpg",
+  "/images/bg16.jpg",
+  "/images/bg17.jpg",
+  "/images/bg18.jpg",
+  "/images/bg19.jpg",
+  "/images/bg20.jpg",
+  "/images/bg21.jpg",
 ];
 function getRandomImage() {
   const randomIndex = Math.floor(Math.random() * images.length);
