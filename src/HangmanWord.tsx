@@ -21,7 +21,7 @@ export function HangmanWord({
       }}
     >
       {wordToGuess.split("").map((letter, index) => (
-        <span style={{ borderBottom: ".1em solid orange" }} key={index}>
+        <span style={{ borderBottom: ".1em solid #ff6600" }} key={index}>
           <span
             style={{
               visibility:
@@ -29,7 +29,7 @@ export function HangmanWord({
                   ? "visible"
                   : "hidden",
               color:
-                !guessedLetters.includes(letter) && reveal ? "red" : "orange",
+                !guessedLetters.includes(letter) && reveal ? "red" : "#ff6600",
             }}
           >
             {letter}

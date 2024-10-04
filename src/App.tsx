@@ -4,7 +4,7 @@ import { HangmanWord } from "./HangmanWord"
 import { Keyboard } from "./Keyboard"
 import englishWords from "./wordList.json"
 import bulgarianWords from "./wordListBg.json"
-import { playWinSound, playLoseSound } from "./utils/sounds";
+import { playWinSound, playLoseSound, playNextLevelSound, playFinishLevel1Sound, playFinishLevel2Sound } from "./utils/sounds";
 const images = [
   "/images/bg1.jpg",
   "/images/bg2.jpg",
@@ -26,7 +26,7 @@ function getRandomImage() {
 
 
 
-const colors = ["red", "blue", "green", "orange", "lilac", "red", "darkblue", "brown", "purple", "indigo", "pink"];
+const colors = ["red", "blue", "green", "#ff6600", "lilac", "red", "darkblue", "brown", "purple", "indigo", "pink"];
 function getRandomColor() {
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
@@ -49,6 +49,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [bgWordColor, setBgWordColor] = useState(getRandomColor());
   const [backgroundImage, setBackgroundImage] = useState(getRandomImage());
+  const [level, setLevel] = useState(1);
   const incorrectLetters = guessedLetters.filter(
     letter => !wordToGuess.includes(letter)
   )
@@ -99,7 +100,6 @@ function App() {
       document.removeEventListener("keypress", handler)
     }
   }, [])
-  // Effect to handle win/lose sounds
   useEffect(() => {
     if (isWinner) {
       playWinSound(); // Play win sound
@@ -111,6 +111,25 @@ function App() {
       setTimeout(resetGame, 2000);
     }
   }, [isWinner, isLoser]);
+  useEffect(() => {
+    if (score == 60) {
+      playFinishLevel1Sound();
+      playFinishLevel2Sound();
+      setScore(0);
+      setLevel(1);
+      resetGame();
+    } else if (score >= 40) {
+      setLevel(3); // Level 3 starts at score 40
+      if (score == 40) {
+        playNextLevelSound();
+      }
+    } else if (score >= 20) {
+      setLevel(2); // Level 2 starts at score 20
+      if (score == 20) {
+        playNextLevelSound()
+      }
+    }
+  }, [score]);
   const resetGame = () => {
     const newWord = getWord();
     setWordToGuess(newWord);
@@ -129,9 +148,9 @@ function App() {
         margin: "0 auto",
         alignItems: "center",
         padding: "1rem",
-        backgroundImage: `url(${backgroundImage})`, // Apply the background image
-        backgroundSize: "cover", // Ensure the image covers the container
-        backgroundPosition: "center", // Center the background image
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <div style={{ color: bgWordColor, fontSize: "1.6rem" }}>{wordToShow}
@@ -155,7 +174,7 @@ function App() {
         </button>
 
         <span style={{ fontSize: "1rem", textAlign: "center" }}>
-          {isWinner && "Winner!"}
+          {isWinner && "Yes!"}
           {isLoser && "Nice Try!"}
         </span>
       </div>
@@ -166,10 +185,14 @@ function App() {
         guessedLetters={guessedLetters}
         wordToGuess={wordToGuess}
       />
-      <div style={{ fontSize: "1.6rem", position: "absolute", marginTop: "80px", marginLeft: "-200px", color: 'orange' }}>
+      <div style={{ fontSize: "1.6rem", position: "absolute", marginTop: "80px", marginLeft: "-200px", color: '#ff6600' }}>
         <strong>Score: {score}</strong>
-      </div> {/* Display the score */}
+      </div>
+      <div style={{ fontSize: "1.6rem", position: "absolute", marginTop: "120px", marginLeft: "-200px", color: '#ff6600' }}>
+        <strong>Level: {level}</strong>
+      </div>
       <div style={{ alignSelf: "stretch" }}>
+
         <Keyboard
           disabled={isWinner || isLoser}
           activeLetters={guessedLetters.filter(letter =>
